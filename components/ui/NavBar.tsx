@@ -18,9 +18,7 @@ const navLinks = [
 export default function NavBar({ user }: NavBarProps) {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/nightaudit'
-
-  const resolveHref = (href: string) => `${basePath}${href}`
+  const resolveHref = (href: string) => href
 
   return (
     <nav className="sticky top-0 z-50 bg-[#e0e5ec] shadow-card">

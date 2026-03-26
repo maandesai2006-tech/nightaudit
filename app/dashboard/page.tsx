@@ -9,7 +9,7 @@ import EmptyState from '@/components/ui/EmptyState'
 import { HOTELS, getLatestStats } from '@/lib/mock/data'
 
 export default function DashboardPage() {
-  const basePath = '/nightaudit'
+  // links use plain paths
 
   const hotelData = useMemo(() => {
     return HOTELS.map(h => ({ hotel: h, stats: getLatestStats(h.id) }))
@@ -61,7 +61,7 @@ export default function DashboardPage() {
         {hotelData.map(({ hotel, stats }, i) => (
           <Link
             key={hotel.id}
-            href={`${basePath}/dashboard/${hotel.id}`}
+            href={`/dashboard/${hotel.id}`}
             className={`card screws p-5 no-underline block animate-fade-up delay-${Math.min(i + 1, 5)}`}
             style={{ textDecoration: 'none', color: 'inherit' }}
           >

@@ -5,16 +5,14 @@ import { Building2 } from 'lucide-react'
 
 export default function LoginPage() {
   const router = useRouter()
-  const basePath = '/nightaudit'
 
   const handleLogin = () => {
-    router.push(`${basePath}/dashboard`)
+    router.push('/dashboard')
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="card-static screws p-10 w-full max-w-md text-center animate-fade-up">
-        {/* Logo */}
         <div className="w-16 h-16 rounded-full shadow-floating bg-[#e0e5ec] flex items-center justify-center mx-auto mb-6">
           <Building2 size={28} className="text-[#ff4757]" />
         </div>
@@ -26,7 +24,6 @@ export default function LoginPage() {
           Hotel Portfolio Intelligence
         </p>
 
-        {/* Demo notice */}
         <div className="shadow-recessed rounded-xl p-4 mb-6">
           <p className="text-xs text-[#4a5568] leading-relaxed">
             This is a <span className="font-bold text-[#ff4757]">demo version</span> with mock data.

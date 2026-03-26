@@ -5,6 +5,6 @@ import { useRouter } from 'next/navigation'
 
 export default function SetupPage() {
   const router = useRouter()
-  useEffect(() => { router.replace('/nightaudit/login') }, [router])
+  useEffect(() => { router.replace('/login') }, [router])
   return null
 }

@@ -11,7 +11,7 @@ import HotelCharts from './HotelCharts'
 import { HOTELS, getStatsForHotel, getLatestStats } from '@/lib/mock/data'
 
 export default function HotelDetailClient({ hotelId }: { hotelId: string }) {
-  const basePath = '/nightaudit'
+  // plain paths
   const hotel = HOTELS.find(h => h.id === hotelId)
   const allStats = useMemo(() => getStatsForHotel(hotelId), [hotelId])
   const latest = useMemo(() => getLatestStats(hotelId), [hotelId])
@@ -28,7 +28,7 @@ export default function HotelDetailClient({ hotelId }: { hotelId: string }) {
   return (
     <div className="max-w-6xl mx-auto px-4 md:px-6 py-6 space-y-6">
       <div className="flex items-center gap-4">
-        <Link href={`${basePath}/dashboard`} className="btn btn-ghost btn-sm" style={{ textDecoration: 'none' }}>
+        <Link href={`/dashboard`} className="btn btn-ghost btn-sm" style={{ textDecoration: 'none' }}>
           <ArrowLeft size={14} /> Back
         </Link>
         <div className="flex-1">
