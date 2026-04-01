@@ -18,40 +18,43 @@ const navLinks = [
 export default function NavBar({ user }: NavBarProps) {
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
-  const resolveHref = (href: string) => href
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#e0e5ec] shadow-card">
-      <div className="flex items-center h-14 px-4 md:px-6 gap-4">
-        {/* Logo + LED */}
-        <Link href={resolveHref('/dashboard')} className="flex items-center gap-2 mr-4 select-none no-underline">
-          <div className="w-2.5 h-2.5 rounded-full led-green animate-pulse" />
-          <span className="font-mono text-xs font-bold tracking-[0.1em] text-[#2d3436] uppercase">NightAudit</span>
+    <nav className="sticky top-0 z-50 bg-[var(--bg)]" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+      <div className="max-w-6xl mx-auto flex items-center h-14 px-4 md:px-6 gap-4">
+        {/* Logo */}
+        <Link href="/dashboard" className="flex items-center gap-2.5 mr-6 select-none no-underline">
+          <div className="dot-live animate-pulse-soft" />
+          <span className="font-mono text-[0.7rem] font-bold tracking-[0.08em] text-[var(--text)] uppercase">
+            NightAudit
+          </span>
         </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-1">
           {navLinks.map(({ href, label, icon: Icon }) => {
-            const isActive = pathname === resolveHref(href) || pathname.startsWith(resolveHref(href) + '/')
+            const isActive = pathname === href || pathname.startsWith(href + '/')
             return (
               <Link
                 key={href}
-                href={resolveHref(href)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 no-underline ${
-                  isActive ? 'tab-active text-[#ff4757]' : 'tab-inactive text-[#4a5568]'
+                href={href}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-wider transition-all duration-150 no-underline rounded-lg ${
+                  isActive
+                    ? 'text-[var(--accent)] bg-[var(--bg)] shadow-[var(--shadow-pressed)]'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text)]'
                 }`}
               >
-                <Icon size={14} />
+                <Icon size={14} strokeWidth={isActive ? 2 : 1.5} />
                 {label}
               </Link>
             )
           })}
         </div>
 
-        {/* Right: User + Role */}
+        {/* Right: User */}
         <div className="ml-auto flex items-center gap-3">
           <div className="text-right hidden sm:block">
-            <p className="text-xs font-bold text-[#2d3436]">{user.name}</p>
+            <p className="text-xs font-semibold text-[var(--text)]">{user.name}</p>
             <span className={`badge badge-${user.role}`}>{user.role}</span>
           </div>
         </div>
@@ -61,22 +64,24 @@ export default function NavBar({ user }: NavBarProps) {
           onClick={() => setMobileOpen(!mobileOpen)}
           className="md:hidden btn btn-ghost btn-sm"
         >
-          {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+          {mobileOpen ? <X size={16} /> : <Menu size={16} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden px-4 pb-3 space-y-1 shadow-card">
+        <div className="md:hidden max-w-6xl mx-auto px-4 pb-3 space-y-1">
           {navLinks.map(({ href, label, icon: Icon }) => {
-            const isActive = pathname === resolveHref(href) || pathname.startsWith(resolveHref(href) + '/')
+            const isActive = pathname === href || pathname.startsWith(href + '/')
             return (
               <Link
                 key={href}
-                href={resolveHref(href)}
+                href={href}
                 onClick={() => setMobileOpen(false)}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider no-underline ${
-                  isActive ? 'shadow-pressed text-[#ff4757]' : 'shadow-sm-neu text-[#4a5568]'
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold uppercase tracking-wider no-underline transition-all ${
+                  isActive
+                    ? 'shadow-[var(--shadow-pressed)] text-[var(--accent)]'
+                    : 'text-[var(--text-muted)] hover:text-[var(--text)]'
                 }`}
               >
                 <Icon size={14} />
